@@ -9,7 +9,7 @@
 // const validator = require('validator')
 // console.log(validator.isURL('https://mail.ru'))
 
-const getNotes = require('./notes.js')
+const notes = require('./notes.js')
 // const notes = getNotes()
 
 // Chalk npm package helps colorifying text output in terminal:
@@ -45,22 +45,24 @@ yargs.command({
         }
     },
     handler: function (argv) {
-        console.log('Title: ' + argv.title);
-        console.log('Body: ' + argv.body);
+        notes.addNote(argv.title, argv.body)
     }
 })
-yargs.parse() //makes a call to yargs and applies all the changes above
+// yargs.parse() //makes a call to yargs and applies all the changes above
 //Create remove command
 yargs.command({
     command: 'remove',
     describe: 'Remove a note',
     builder: {
         title: {
-            describe: 'Note title'
+            describe: 'Note title',
+            demandOption: true, //Makes title to be required to run, wont work, only works with such command: node app.js --title='Shoppinglist'; if it's just --title , the value would be = true
+            type: 'string'
+
         }
     },
     handler: function (argv) {
-        console.log('Removing the note', argv)
+        notes.removeNote(argv.title)
     }
 })
 
