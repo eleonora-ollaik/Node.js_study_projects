@@ -44,7 +44,7 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function (argv) {
+    handler(argv) {
         notes.addNote(argv.title, argv.body)
     }
 })
@@ -61,7 +61,7 @@ yargs.command({
 
         }
     },
-    handler: function (argv) {
+    handler (argv) {
         notes.removeNote(argv.title)
     }
 })
@@ -70,8 +70,8 @@ yargs.command({
 yargs.command({
     command: 'list',
     describe: 'List of all the notes',
-    handler: function() {
-        console.log('Here is the list')
+    handler() {
+        notes.listNotes();
     }
 })
 
@@ -79,11 +79,20 @@ yargs.command({
 yargs.command({
     command: 'read',
     describe: 'Read a note',
-    handler: function () {
-        console.log('Reading notes')
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true, //Makes title to be required to run, wont work, only works with such command: node app.js --title='Shoppinglist'; if it's just --title , the value would be = true
+            type: 'string'
+
+        }
+    },
+    handler () {
+        notes.readNote(argv.title)
     }
 })
-console.log(yargs.argv)
+// console.log(yargs.argv)
+
 //Passing parameters from command line:
 
 // if(command === 'add') {
