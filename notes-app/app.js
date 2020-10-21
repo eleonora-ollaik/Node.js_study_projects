@@ -9,7 +9,7 @@
 // const validator = require('validator')
 // console.log(validator.isURL('https://mail.ru'))
 
-const notes = require('./notes.js')
+const notes = require('./notes.js');
 // const notes = getNotes()
 
 // Chalk npm package helps colorifying text output in terminal:
@@ -20,9 +20,9 @@ const chalk = require('chalk');
 
 // Yargs npm package helps building command line tools:
 
-const yargs = require('yargs')
+const yargs = require('yargs');
 
-const command = process.argv[2] //.argv passes argument from command line
+const command = process.argv[2]; //.argv passes argument from command line
 // console.log(process.argv)
 //Customize yargs version
 
@@ -45,7 +45,7 @@ yargs.command({
         }
     },
     handler(argv) {
-        notes.addNote(argv.title, argv.body)
+        notes.addNote(argv.title, argv.body);
     }
 })
 // yargs.parse() //makes a call to yargs and applies all the changes above
@@ -62,7 +62,7 @@ yargs.command({
         }
     },
     handler (argv) {
-        notes.removeNote(argv.title)
+        notes.removeNote(argv.title);
     }
 })
 
@@ -88,7 +88,7 @@ yargs.command({
         }
     },
     handler () {
-        notes.readNote(argv.title)
+        notes.readNote(argv.title);
     }
 })
 // console.log(yargs.argv)

@@ -10,7 +10,7 @@ const addNote =  (title, body) => {
     // const duplicateNotes = notes.filter( (note) =>
     //     note.title === title
     // )
-    const duplicateNote = notes.find((note) => note.title ===title)
+    const duplicateNote = notes.find((note) => note.title === title);
     if (!duplicateNote) {
         notes.push({
             title: title,
@@ -25,32 +25,31 @@ const addNote =  (title, body) => {
 
 const readNote = (title) => {
     const notes = loadNotes();
-    const note = notes.find((note) => note.title === title)
+    const note = notes.find((note) => note.title === title);
     if (note) {
-        console.log(chalk.inverse(note.title))
-        console.log(note.body)
+        console.log(chalk.inverse(note.title));
+        console.log(note.body);
     } else {
-        console.log(chalk.red.inverse('not found'))
+        console.log(chalk.red.inverse('not found'));
     }
 }
 
 const removeNote =  (title) => {
     const notes = loadNotes();
-    const notesLeft = notes.filter((note) =>
-        note.title != title
-    )
+    const notesLeft = notes.filter((note) => note.title != title);
+
     if(notesLeft.length < notes.length ) {
         saveNotes(notesLeft);
-        console.log(chalk.inverse.green('Note removed!'))
+        console.log(chalk.inverse.green('Note removed!'));
     } else {
-        console.log(chalk.inverse.red('No such title found!'))
+        console.log(chalk.inverse.red('No such title found!'));
     }
 }
 
 const listNotes = () => {
     const notes = loadNotes();
-    console.log(chalk.inverse('Your notes: '))
-    notes.forEach((note) => console.log(note.title) )
+    console.log(chalk.inverse('Your notes: '));
+    notes.forEach((note) => console.log(note.title));
 }
 
 const saveNotes =  (notes) => {
@@ -60,12 +59,12 @@ const saveNotes =  (notes) => {
 
 const loadNotes = () => {
     try {
-        const dataBuffer = fs.readFileSync('notes.json')
+        const dataBuffer = fs.readFileSync('notes.json');
         const dataJson = dataBuffer.toString();
-        return JSON.parse(dataJson)
+        return JSON.parse(dataJson);
     
     } catch (e) {
-        return []
+        return [];
     }
 }
 
@@ -76,3 +75,6 @@ module.exports = {
     listNotes: listNotes,
     readNote: readNote
 }
+
+//how to debug: put word 'debugger' in code after statement you want to inspect and type 'node --inspect-brk appname.js add --title='blabla'' in terminal, then 'restart'
+//chrome://inspect
